@@ -31,7 +31,7 @@ class Spree::Blogs::Admin::PostsController < Spree::Admin::ResourceController
     def collection
       params[:q] ||= {}
       params[:q][:s] ||= "posted_at desc"
-      @search = Spree::Post.where('posted_at < ?', Time.now).ransack(params[:q])
+      @search = Spree::Post.ransack(params[:q])
       @collection = @search.result.page(params[:page]).per(Spree::Post.per_page)
     end
 
