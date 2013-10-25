@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency('spree_essentials')
   s.add_runtime_dependency('acts-as-taggable-on')
+  s.add_dependency 'simple_form'
 
   s.add_development_dependency('shoulda')
   s.add_development_dependency('dummier')

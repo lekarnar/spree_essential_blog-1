@@ -7,16 +7,10 @@
   <div id="add-line-item">
     <fieldset>
       <legend><%= t('.add_related_product') %></legend>
-      <div style="float:left;width:55%;margin-right:5%;">
-        <%= label_tag :add_product_name, t("name_or_sku") %>
-        <%= text_field_tag :add_product_name,  '', :class => 'fullwidth title'  %>
-        <%= hidden_field_tag :add_variant_id %>
-      </div>
-      <div style="float: left; width: 15%; padding-top: 17px;">
-        <%= link_to text_for_button_link(t("add"), :icon => 'add'),
-            admin_post_products_path(@post),
-            :id => "add_related_product", :class => 'button' %>
-      </div>
+      <%= simple_form_for(Spree::PostProduct.new, url: admin_post_products_path) do |f| %>
+        <%= f.association :product, input_html: { class: 'fullwidth' } %>
+        <%= f.submit 'Add related product' %>
+      <% end %>
     </fieldset>
   </div>
 
