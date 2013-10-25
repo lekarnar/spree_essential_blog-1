@@ -8,7 +8,7 @@
     <fieldset>
       <legend><%= t('.add_related_product') %></legend>
       <%= simple_form_for(Spree::PostProduct.new, url: admin_post_products_path) do |f| %>
-        <%= f.association :product, input_html: { class: 'fullwidth' } %>
+        <%= f.association :product %>
         <%= f.submit 'Add related product' %>
       <% end %>
     </fieldset>

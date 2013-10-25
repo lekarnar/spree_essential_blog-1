@@ -2,15 +2,15 @@
   <thead>
     <tr>
       <th><%= t('name') %></th>
-      <th></th>
+      <th class="actions"></th>
     </tr>
   </thead>
   <tbody>
     <% post.post_products.each do |post_product| %>
       <tr id="<%= dom_id post_product %>">
         <td><%= post_product.product.name %></td>
-        <td width="70px">
-          <%= link_to_delete post_product, {:url => admin_post_product_url(post, post_product)} %>
+        <td width="70px" class="actions">
+          <%= link_to_delete post_product, {:url => admin_post_product_url(post, post_product), no_text: true} %>
         </td>
       </tr>
     <% end %>
