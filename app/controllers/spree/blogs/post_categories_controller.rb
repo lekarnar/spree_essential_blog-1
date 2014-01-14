@@ -6,6 +6,7 @@ class Spree::Blogs::PostCategoriesController < Spree::BaseController
 
   def show
     @category = Spree::PostCategory.find_by_permalink(params[:id])
+    render text: "Category not found", status: 410 if @category.nil?
     @posts = @category.posts.live
     @posts = @posts.order('posted_at DESC').page(params[:page]).per(Spree::Post.per_page)
   end
