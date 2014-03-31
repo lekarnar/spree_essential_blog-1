@@ -10,7 +10,7 @@ class Spree::Blog < ActiveRecord::Base
 
   before_validation :normalize_permalink
 
-  attr_accessible :name, :permalink
+  # attr_accessible :name, :permalink
 
   def self.find_by_permalink!(path)
     super path.to_s.gsub(/(^\/+)|(\/+$)/, "")
