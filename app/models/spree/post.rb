@@ -11,7 +11,7 @@ class Spree::Post < ActiveRecord::Base
   belongs_to :blog, :class_name => "Spree::Blog"
   has_many :post_products, :dependent => :destroy
   has_many :products, :through => :post_products
-  has_many :images, :as => :viewable, :class_name => "Spree::PostImage", :order => :position, :dependent => :destroy
+  has_many :images, ->{ order(:position) }, :as => :viewable, :class_name => "Spree::PostImage", :order => :position, :dependent => :destroy
 
   validates :blog_id, :title, :presence => true
   validates :path,  :presence => true, :uniqueness => true, :if => proc{ |record| !record.title.blank? }
