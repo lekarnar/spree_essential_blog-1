@@ -1,7 +1,10 @@
 class Spree::PossibleBlog
-  def self.matches?(request)
-    return false if request.fullpath =~ Spree::Blog::RESERVED_PATHS
-    permalink = request.path.gsub(/(^\/+)/, "").split('/').first
+  def matches?(request)
+    @locales ||= I18n.available_locales.map &:to_s
+    components = request.path.gsub(/(^\/+)/, "").split('/')
+    components.shift if @locales.include?(components.first)
+    return false if components.first =~ Spree::Blog::RESERVED_PATHS
+    permalink = components.first
     blog = Spree::Blog.find_by_permalink!(permalink) rescue nil
     blog.present?
   end
@@ -27,19 +30,19 @@ Spree::Core::Engine.routes.draw do
     end
 
     # PLZ is there a better way to do this?!
-    # constraints Spree::PossibleBlog do
-    #   constraints(
-    #     :year  => /\d{4}/,
-    #     :month => /\d{1,2}/,
-    #     :day   => /\d{1,2}/
-    #   ) do
-    #     get ":blog_id/:year(/:month(/:day))" => "posts#index", :as => :post_date
-    #     get ":blog_id/:year/:month/:day/:id" => "posts#show",  :as => :full_post
-    #   end
-    #   get ":blog_id/category/:id"   => "post_categories#show", :as => :post_category, :constraints => { :id => /.*/ }
-    #   get ":blog_id/search/:query"  => "posts#search",         :as => :search_posts, :query => /.*/
-    #   get ":blog_id/archive"        => "posts#archive",        :as => :archive_posts
-    #   get ":blog_id"                => "posts#index",          :as => :blog_posts
-    # end
+    constraints Spree::PossibleBlog.new do
+      constraints(
+        :year  => /\d{4}/,
+        :month => /\d{1,2}/,
+        :day   => /\d{1,2}/
+      ) do
+        get ":blog_id/:year(/:month(/:day))" => "posts#index", :as => :post_date
+        get ":blog_id/:year/:month/:day/:id" => "posts#show",  :as => :full_post
+      end
+      get ":blog_id/category/:id"   => "post_categories#show", :as => :post_category, :constraints => { :id => /.*/ }
+      get ":blog_id/search/:query"  => "posts#search",         :as => :search_posts, :query => /.*/
+      get ":blog_id/archive"        => "posts#archive",        :as => :archive_posts
+      get ":blog_id"                => "posts#index",          :as => :blog_posts
+    end
   end
 end
