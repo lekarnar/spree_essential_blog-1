@@ -10,7 +10,7 @@ class Spree::PossibleBlog
   end
 end
 
-Spree::Core::Engine.routes.draw do
+Spree::Core::Engine.add_routes do
   scope(:module => "blogs") do
     namespace :admin do
       resources :blogs, :constraints => { :id => /[a-z0-9\-\_\/]{3,}/ }
