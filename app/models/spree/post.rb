@@ -58,6 +58,10 @@ class Spree::Post < ActiveRecord::Base
     live && live == true
   end
 
+  def expired?
+    expires_at && expires_at < Time.now
+  end
+
   def to_param
 		path
 	end

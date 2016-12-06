@@ -1,18 +1,27 @@
-<div class="post-preview"  data-hook="post-preview">
+<li class="post-preview four columns eightOnLandscape"  data-hook="post-preview">
 
   <div class="post-title"  data-hook="post-title">
-    <h2><%= link_to h(post.title), post_seo_path(@blog, post) %></h2>
-    <h5><%= date_full(post.posted_at) %></h5>
+    <% if post.blog.permalink == 'blog' %>
+      <h5 style="line-height:20px;"><%= l post.posted_at, :format => :date_only %></h5>
+    <% end %>
+    <h2 style="line-height:20px;"><%= link_to h(post.title), post_seo_path(post.blog, post) %><% if post.expired? %> <span class="special dib button b0 c0 sale pink" style="font-size:11px;padding:2px 5px;">poteklo</span><% end %></h2>
+
   </div>
 
   <% if post.has_images? %>
-    <p class="post-images"><%= link_to image_tag(post.images.first.attachment.url, :alt => post.title), post_seo_path(@blog, post) %></p>
+    <div class="post-images product b0 fl four columns threeOnBig sixOnDesktop alpha mt1em mb1em">
+      <%= link_to image_tag(post.images.first.attachment.url, :alt => post.title), post_seo_path(post.blog, post) %>
+      <%# if post.expired? %>
+        <!-- <span class="special sale" style="right:auto; left:10px; top:10px;">poteklo</span> -->
+      <%# end %>
+    </div>
   <% end %>
 
-  <%= post.rendered_preview %>
-  
-  <br class="clear" />
-  
-  <p><%= link_to t('.read_more'), post_seo_path(@blog, post) %></p>
-  
-</div>
+  <p style="font-size:14px;line-height:20px;"><%=raw shorten(strip_tags(post.rendered_preview), 190) %></p>
+
+
+    <%= link_to post_seo_path(@blog, post), :class => "db mb2em", :style => "font-size:14px;line-height:20px;" do %>
+      <%= t('.read_more') %> <i class="ml5 icon-angle-right"></i>
+    <% end %>
+
+</li>

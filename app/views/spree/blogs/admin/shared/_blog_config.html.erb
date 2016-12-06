@@ -1,8 +1,2 @@
-<tr>
-  <td><%= link_to t("spree.blogs.settings.blogs"), admin_blogs_path %></td>
-  <td><%= t("spree.blogs.settings.explain_blogs") %></td>
-</tr>
-<tr>
-  <td><%= link_to t("spree.blogs.settings.disqus"), edit_admin_disqus_settings_path %></td>
-  <td><%= t("spree.blogs.settings.explain_disqus") %></td>
-</tr>
+<%= configurations_sidebar_menu_item t("spree.blogs.settings.blogs"), admin_blogs_path %>
+<%= configurations_sidebar_menu_item t("spree.blogs.settings.disqus"), edit_admin_disqus_settings_path %>

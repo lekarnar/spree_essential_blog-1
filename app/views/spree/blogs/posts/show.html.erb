@@ -1,37 +1,128 @@
+<% self.title = @post.title %>
+<% content_for :head do %>
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@LekarnarTim">
+  <meta name="twitter:creator" content="@LekarnarTim">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="<%= "http://"+Spree::Config[:site_url] + post_seo_path(@blog, @post) %>">
+  <meta property="og:title" content="<%= @post.title %>">
+  <meta property="og:description" content="<%= shorten(strip_tags(@post.body), 200) %>">
+  <meta property="og:image" content="<%= "http://"+Spree::Config[:site_url]+@post.images.first.attachment.url(:medium) if @post.images.size > 0 %>">
+
+  <script type="text/javascript">
+// (function(d){
+//   var f = d.getElementsByTagName('SCRIPT')[0], p = d.createElement('SCRIPT');
+//   p.type = 'text/javascript';
+//   p.async = true;
+//   p.src = '//assets.pinterest.com/js/pinit.js';
+//   f.parentNode.insertBefore(p, f);
+// }(document));
+</script>
+
+<script type="text/javascript">
+  (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/hD64bzDLPCpguTgSMAuMorqBJUu1sfvE8lTUrAw3/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
+</script>
+
+
+<% end %>
+
+<% content_for :body_class do %>two-col three-col<% end %>
+
 <% content_for :sidebar do %>
   <%= render :partial => 'spree/blogs/shared/sidebar' %>
 <% end %>
 
-<div class="post" data-hook="post-show">
-  
-  <div class="post-title" data-hook="post-show-title">
-    <h5><%= h @post.posted_at.strftime('%A %B %d, %Y').gsub(/\s0/, ' ') %></h5> 
-    <h1><%=h @post.title %></h1>
-  </div>
-  
-  <% if @post.has_images? %>     
-    <div class="post-images" data-hook="post-show-image">
-      <% @post.images.each_with_index do |image, index| %>
-   	    <p><%= link_to image_tag(image.attachment.url(:medium), :alt => image.has_alt? ? image.alt : "#{@post.title} - Photo #{index + 1}"), image.attachment.url(:large), :id => "photo_#{index}" %></p>
- 	    <% end %>
+<div class="post eightContOnBig fw300" data-hook="post-show">
+  <div class="content">
+    <div class="post-title twelve columns eightOnBig" data-hook="post-show-title">
+      <% if @blog.permalink == "blog" %><h5><%= h l(@post.posted_at, :format => :date_only).gsub(/\s0/, ' ') %></h5><% end %>
+      <h1><%=h @post.title %><% if @post.expires_at != nil %> <span class="special dib button b0 c0 sale pink" style="font-size:12px;"><% if @post.expired? %>poteklo<% elsif @post.expires_at %>do <%= l @post.expires_at, :format => :date_only %><% end %></span><% end %></h1>
     </div>
-  <% end %>   
-    
-  <%= @post.rendered_body %>  
-  
-  <br class="clear"/>
-  
-  <div class="post-tags" data-hook="post-show-tags">
-    <h5>Tagged:</h5>
-    <p><%= @post.tags.collect{|tag| link_to(tag.name, search_posts_path(@blog, tag.name)) }.join(", ").html_safe %></p>
+
+    <% if @post.has_images? %>
+      <div class="post-images product twelve columns eightOnBig" data-hook="post-show-image">
+        <% @post.images.each_with_index do |image, index| %>
+          <p><%= image_tag(image.attachment.url(:medium), :alt => ((image.alt != "") ? image.alt : "#{@post.title} - Slika #{index + 1}")) %></p>
+        <% end %>
+        <%# if @post.expired? %>
+          <!-- <span class="special sale oh" style="font-size: 81.25%; right:auto; left:10px; top:10px;">poteklo</span> -->
+        <%# elsif @post.expires_at %>
+          <!-- <span class="special sale oh" style="font-size: 81.25%; right:auto; left:10px; top:10px;">do <%#= l @post.expires_at, :format => :date_only %></span> -->
+        <%# end %>
+
+      </div>
+    <% end %>
+
+    <div class="post-body twelve columns eightOnBig" data-hook="post-show-body">
+      <%= @post.rendered_body %>
+      <% if @post.expired? %>
+        <p class="i">Akcija je potekla.</p>
+      <% end %>
+    </div>
+
+    <%# tags =  @post.tags.collect{|tag| link_to(tag.name, search_posts_path(@blog, tag.name)) } %>
+    <%# if tags.size > 0 %>
+    <!-- <div class="post-tags twelve columns eightOnBig" data-hook="post-show-tags"> -->
+      <!-- <h5><%#= t('.tagged') %>:</h5> -->
+      <!-- <p><%#= tags.join(", ").html_safe %></p> -->
+    <!-- </div> -->
+    <%# end %>
+    <div class="post-tags twelve columns eightOnBig mb1lh" data-hook="post-share">
+      <ul class="social-likes social-likes_single" data-single-title=" ">
+        <li class="facebook" title="Objavi izdelek na Facebooku">Facebook</li>
+        <li class="twitter" title="Objavi povezavo na Twitter">Twitter</li>
+        <li class="plusone" title="Objavi povezavo na Google+">Google+</li>
+        <li class="pinterest" title="Objavi sliko na Pinterest" data-media="">Pinterest</li>
+      </ul>
+    </div>
   </div>
 
   <% unless @post.products.empty? %>
-    <div class="post-products" data-hook="post-show-related-products">
-      <%= render 'spree/shared/products', :products => @post.products %>
-    </div>
-  <% end %>
-  
-  <%= render "spree/blogs/shared/disqus_comments" if @blog_config %>
+    <%#= render 'spree/shared/carousel', :products => @post.products %>
+    <% if @post.products_title != "" %>
+      <h3 class="twelve columns mt1lh" style="line-height:30px;"><%= @post.products_title %></h3>
+    <% end %>
+  <div class="pr featuredProducts fl fw400 mb1lh">
+    <div class="twelve columns eightOnBig" style="border-top:2px solid #d0d2d1; padding-top:8px;"></div>
 
+
+    <ul class="products asRows fl mt1lh mb1lh">
+        <% @post.products.each do |product| %>
+          <%= render 'spree/shared/product_simple', :product => product %>
+        <% end %>
+    </ul>
+
+  </div>
+  <% end %>
+
+  <%= render "spree/blogs/shared/disqus_comments" %>
+
+</div>
+
+<div class="rightSide fl fourContOnBig clearfix mb1lh">
+  <div class="banner four columns fiveOnTablet mb1lh">
+   <!-- <a data-pin-do="embedUser" href="http://pinterest.com/lekarnar/"></a> -->
+
+    <div id="y-embedded-widget" class="yotpo embedded-widget"
+         data-appkey="hD64bzDLPCpguTgSMAuMorqBJUu1sfvE8lTUrAw3"
+         data-product-id="yotpo_global_reviews"
+         data-layout="reviews"
+         data-width="100"
+         data-reviews="5"
+         data-header-text="Zadnja mnenja"
+         data-header-background-color="ffffff"
+         data-body-background-color="FFFFFF"
+         data-font-size="18"
+         data-font-color="919191">&nbsp;
+    </div>
+  </div>
+
+  <div class="banner four columns fiveOnTablet mb1lh">
+    <a class="twitter-timeline" href="https://twitter.com/LekarnarTim" data-widget-id="354522049110233088">Tweets by @LekarnarTim</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+  </div>
+  <div class="banner four columns fiveOnTablet mb1lh">
+
+  </div>
 </div>
