@@ -1,12 +1,23 @@
 class Spree::Blogs::Admin::PostsController < Spree::Admin::ResourceController
 
-  def index
-    @pages = collection
-  end
+  # def index
+  #   binding.pry
+  #   @pages = collection
+  # end
 
   def new
     @post = Spree::Post.new
     @post.posted_at ||= Time.now
+  end
+
+  def edit
+    @post = Spree::Post.find_by_path(params[:id])
+  end
+
+  protected
+
+  def model_class
+    @model_class = Spree::Post
   end
 
   private

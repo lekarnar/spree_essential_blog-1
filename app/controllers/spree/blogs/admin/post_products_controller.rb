@@ -4,7 +4,7 @@ class Spree::Blogs::Admin::PostProductsController < Spree::Admin::BaseController
 
   def create
     position = @post.products.count
-    @product = Spree::Product.find(params[:post_product][:product_id])
+    @product = Spree::Product.find(params[:post_product][:product])
     Spree::PostProduct.create(:post_id => @post.id, :product_id => @product.id, :position => position)
     redirect_to :back
   end
@@ -14,6 +14,12 @@ class Spree::Blogs::Admin::PostProductsController < Spree::Admin::BaseController
     if @related.destroy
       render_js_for_destroy
     end
+  end
+
+  protected
+
+  def model_class
+    @model_class = Spree::PostProduct
   end
 
   private

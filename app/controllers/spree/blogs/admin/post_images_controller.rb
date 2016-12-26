@@ -1,5 +1,5 @@
 class Spree::Blogs::Admin::PostImagesController < Spree::Admin::ResourceController
-  
+
   before_filter :load_data
 
   create.before :set_viewable
@@ -15,9 +15,14 @@ class Spree::Blogs::Admin::PostImagesController < Spree::Admin::ResourceControll
       format.js  { render :text => 'Ok' }
     end
   end
-  
+
+  protected
+  def model_class
+    @model_class = Spree::PostImage
+  end
+
   private
-  
+
   def location_after_save
     admin_post_images_url(@post)
   end

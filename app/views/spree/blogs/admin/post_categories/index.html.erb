@@ -4,7 +4,7 @@
   <%= form_for([:admin, @post]) do |f| %>
     <fieldset>
       <legend><%= t('.manage_categories') %></legend>
-      <table class="index">
+      <table class="table table-striped table-bordered index post-categories">
         <% @post_categories.each_with_index do |category, index| -%>
           <tr id="<%= dom_id(category) %>" class="<%= cycle('even', 'odd') %>">
             <td>

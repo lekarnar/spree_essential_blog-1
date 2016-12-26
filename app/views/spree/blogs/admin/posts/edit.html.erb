@@ -1,10 +1,17 @@
+<%= tinymce_assets %>
+<script type="text/javascript">
+    $(window).load(function() {
+      <%= tinymce_javascript %>
+    });
+</script>
+
 <%= render :partial => 'spree/blogs/admin/shared/post_tabs', :locals => {:current => "Post Details"} %>
 
 <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @post } %>
 
 <%= form_for([:admin, @post]) do |f| %>
   <fieldset class="no-border-top">
-    <%= render "form", :form => f %>
+    <%= render "form", :f => f %>
     <%= render :partial => 'spree/admin/shared/edit_resource_links' %>
   </fieldset>
 <% end %>

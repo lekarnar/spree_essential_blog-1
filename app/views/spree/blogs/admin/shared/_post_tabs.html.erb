@@ -4,24 +4,32 @@
 
 <%= render :partial => 'spree/admin/shared/contents_sub_menu' %>
 
-<% content_for :sidebar_title do %>
-  <%= @post.title %> &dash; <span class='sku'><%= l (@post.posted_at.to_date || Date.today), :format => :short %></span>
+<%= content_for :sidebar_title do %>
+  <span class="sku"><%= l (@post.posted_at || Time.now), :format => :date_only %></span>
 <% end %>
 
 <% content_for :sidebar do %>
   <nav class="menu">
     <ul class="sidebar post-menu">
       <li<%= ' class="active"'.html_safe if current == "Post Details" %>>
-        <%= link_to t(".post_details"), edit_admin_post_url(@post) %>
+        <%= link_to edit_admin_post_url(@post) do %>
+          <span class="glyphicon glyphicon-edit"></span> <%= t(".post_details") %>
+        <% end %>
       </li>
       <li<%= ' class="active"'.html_safe if current == "Images" %>>
-        <%= link_to t("images"), admin_post_images_url(@post) %>
+        <%= link_to admin_post_images_url(@post) do %>
+          <span class="glyphicon glyphicon-picture"></span> <%= t(".post_details") %> <%= t("images") %>
+        <% end %>
       </li>
       <li<%= ' class="active"'.html_safe if current == "Related Products" %>>
-        <%= link_to t(".related_products"), admin_post_products_url(@post) %>
+        <%= link_to admin_post_products_url(@post) do %>
+          <span class="glyphicon glyphicon-th-large"></span> <%= t(".post_details") %> <%= t(".related_products") %>
+        <% end %>
       </li>
       <li<%= ' class="active"'.html_safe if current == "Categories" %>>
-        <%= link_to t(".post_categories"), admin_post_categories_url(@post) %>
+        <%= link_to admin_post_categories_url(@post) do %>
+          <span class="glyphicon glyphicon-th-large"></span> <%= t(".post_details") %> <%= t(".post_categories") %>
+        <% end %>
       </li>
     </ul>
   </nav>
