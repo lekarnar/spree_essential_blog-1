@@ -1,44 +1,66 @@
-<%= form.field_container :blog_id do %>
-  <%= form.label :blog_id, t("activerecord.attributes.blog.model_name") %><br />
-  <%= form.select :blog_id, Spree::Blog.to_options, :class => 'title' %>
-  <%= error_message_on :post, :blog_id %>
-<% end %>
+<div class="alpha six columns">
+  <%= f.field_container :blog_id do %>
+    <%= f.label :blog_id, t("activerecord.attributes.blog.model_name") %><br />
+    <%= f.select :blog_id, Spree::Blog.to_options, {}, :class => 'title select2' %>
+    <%= error_message_on :post, :blog_id %>
+  <% end %>
 
-<%= form.field_container :title do %>
-  <%= form.label :title, t("activerecord.attributes.post.title") %><br />
-  <%= form.text_field :title, :class => 'title' %>
-  <%= error_message_on :post, :title %>
-<% end %>
+  <%= f.field_container :title do %>
+    <%= f.label :title, t("activerecord.attributes.post.title") %><br />
+    <%= f.text_field :title, :class => 'title form-control' %>
+    <%= error_message_on :post, :title %>
+  <% end %>
+</div>
 
-<%= form.field_container :posted_at do %>
-  <%= form.label :posted_at, t("activerecord.attributes.post.posted_at") %><br />
-  <%= form.text_field :posted_at, :class => 'text', :value => (@post.posted_at.to_s(:long) unless @post.posted_at.nil?) %><br />
-  <%= error_message_on :post, :posted_at %>
-<% end %>
+<div class="omega six columns">
+  <%= f.field_container :posted_at do %>
+    <%= f.label :posted_at, t("activerecord.attributes.post.posted_at") %><br />
+    <%= f.text_field :posted_at, :class => 'text form-control', :value => ((l @post.posted_at, :fat => :long) unless @post.posted_at.nil?) %><br />
+    <%= error_message_on :post, :posted_at %>
+  <% end %>
+</div>
 
-<%= form.field_container :body do %>
-  <%= form.label :body, t("activerecord.attributes.post.body") %><%= markdown_helper %><br />
-  <%= form.text_area :body  %>
+<div class="clear"></div>
+
+<%= f.field_container :body do %>
+  <%= f.label :body, t("activerecord.attributes.post.body") %><%#= markdown_helper %><br />
+  <%= f.text_area :body, :class => "tinymce fullwidth" %>
   <%= error_message_on :post, :body %>
 <% end %>
 
-<%= form.field_container :tag_list do %>
-  <%= form.label :tag_list, t("activerecord.attributes.post.tags") %><br />
-  <%= form.text_field :tag_list, :class => 'text' %><br />
+<%= f.field_container :tag_list do %>
+  <%= f.label :tag_list, t("activerecord.attributes.post.tags") %><br />
+  <%= f.text_field :tag_list, :class => 'text form-control' %><br />
   <%= error_message_on :post, :tag_list %>
 <% end %>
 
-<%= form.field_container :live do %>
-  <%= form.check_box :live  %> <%= form.label :live, t("activerecord.attributes.post.live") %><br />
+<%= f.field_container :products_title do %>
+  <%= f.label :products_title, t("activerecord.attributes.post.products_title") %><br />
+  <%= f.text_field :products_title, :class => 'title form-control' %>
+  <%= error_message_on :post, :products_title %>
+<% end %>
+
+<%= f.field_container :link_title do %>
+  <%= f.label :link_title, t("activerecord.attributes.post.link_title") %><br />
+  <%= f.text_field :link_title, :class => 'title form-control' %>
+  <%= error_message_on :post, :link_title %>
+<% end %>
+
+<%= f.field_container :posted_at do %>
+  <%= f.label :expires_at, "Akcija poteče" %><br />
+  <%= f.text_field :expires_at, :class => 'form-control', :value => ((l @post.expires_at, :format => :date_time) unless @post.expires_at.nil?) %><br />
+  <%= error_message_on :post, :expires_at %>
+<% end %>
+
+<%= f.field_container :live do %>
+  <%= f.check_box :live  %> <%= f.label :live, t("activerecord.attributes.post.live") %><br />
 <% end %>
 
 <% content_for :head do %>
   <script type="text/javascript">
-  //<![CDATA[
     $(document).ready(function() {
       $('#post_posted_at').autodate();
-      $('#post_body').markItUp(markdownSettings);
-    }); 
-  //]]>
+
+    });
   </script>
 <% end %>

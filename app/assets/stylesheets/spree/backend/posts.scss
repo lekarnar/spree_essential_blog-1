@@ -1,0 +1,37 @@
+.posts-list, .blog-related-products, .post-categories {
+  border: 0px;
+  font-size: 13px;
+  margin-left: 15px;
+  color: #6788A2;
+
+  td:last-child, .actions {
+    border: 0px;
+    background-color: white;
+  }
+
+  thead tr th{
+    border-top: 1px solid #ddd !important;
+    &:last-child{
+        border: 0 !important;
+    }
+  }
+}
+
+#add-line-item legend {
+  text-align: center;
+}
+
+.form-actions {
+  margin-top: 20px;
+}
+
+.blog-related-products, .blog-related-products th {
+  text-align: center;
+}
+.post-menu {
+  li {
+    display: block;
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+}

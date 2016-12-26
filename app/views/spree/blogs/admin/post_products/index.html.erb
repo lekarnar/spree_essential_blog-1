@@ -6,10 +6,21 @@
 
   <div id="add-line-item">
     <fieldset>
-      <legend><%= t('.add_related_product') %></legend>
+      <legend><%= Spree.t('add_related_product') %></legend>
       <%= simple_form_for(Spree::PostProduct.new, url: admin_post_products_path) do |f| %>
-        <%= f.association :product %>
-        <%= f.submit 'Add related product' %>
+        <div class="row">
+          <div class="date-range-filter col-md-8">
+            <div class="col-md-6">
+              <div class="form-group">
+                <%= label_tag :product, Spree.t('products') %>
+                <%#= f.select :product, Spree::Product.all.map {|s| [s.name, s.id]}, {:include_blank => true}, :class => 'select2 js-filterable' %>
+              </div>
+            </div>
+            <div class="form-actions">
+              <%= f.submit Spree.t('add'), :class => 'btn btn-primary' %>
+            </div>
+          </div>
+        </div>
       <% end %>
     </fieldset>
   </div>
