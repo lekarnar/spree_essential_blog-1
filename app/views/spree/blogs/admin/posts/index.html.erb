@@ -4,9 +4,11 @@
 
 <% content_for :page_actions do %>
   <li id="new_post_link">
-    <%= link_to t('.new_post'), new_admin_post_path, { :icon => 'icon-plus', :id => 'admin_new_post' } %>
+    <%= link_to t('.new_post'), new_admin_post_path, { :icon => 'icon-plus', :id => 'admin_new_post', class: 'btn btn-success' } %>
   </li>
 <% end %>
+
+
 
 <%= render :partial => 'spree/admin/shared/contents_sub_menu' %>
 
