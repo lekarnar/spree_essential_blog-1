@@ -1,5 +1,5 @@
 <% content_for :page_title do %>
-  <%= t(:listing_posts) %>
+  <%= Spree.t(:listing_posts) %>
 <% end %>
 
 <% content_for :page_actions do %>
@@ -8,10 +8,7 @@
   </li>
 <% end %>
 
-
-
 <%= render :partial => 'spree/admin/shared/contents_sub_menu' %>
-
 
   <%= search_form_for [:admin, @search] do |f| %>
     <div class="row">
@@ -31,7 +28,7 @@
               <%= f.text_field :title_cont, :size => 25, :class => 'form-control js-quick-search-target' %>
             </div>
           </div>
-          <div class="col-md-6 form-actions"><%= button t("search") %></div>
+          <div class="col-md-6 form-actions"><%= button Spree.t("search") %></div>
         </div>
       </div>
     </div>
@@ -41,13 +38,13 @@
   <div class="col-md-12">
     <table class="table table-bordered index posts-list">
       <thead>
-    	<tr>
+      	<tr>
         	<th><%= sort_link @search, :title, t("activerecord.attributes.post.title") %></th>
         	<th><%= sort_link @search, :blog,  t("activerecord.attributes.blog.model_name") %></th>
         	<th><%= sort_link @search, :posted_at, t("activerecord.attributes.post.posted_at") %></th>
         	<th><%= sort_link @search, :live, t("activerecord.attributes.post.live") %></th>
         	<th class="actions"><%#= t("action") %></th>
-    	</tr>
+      	</tr>
       </thead>
       <tbody>
         <%- @collection.each do |post|%>
