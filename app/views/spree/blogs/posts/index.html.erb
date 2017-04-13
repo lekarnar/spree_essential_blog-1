@@ -8,7 +8,7 @@
 <% end %>
 
 <% if @posts.blank? %>
-  <h1><%= t('spree.blogs.no_posts') %></h1>
+  <h1><%= Spree.t('spree.blogs.no_posts') %></h1>
 <% else %>
   <ul class="posts content asRows clearfix cb fw300" data-hook="posts-index">
 
