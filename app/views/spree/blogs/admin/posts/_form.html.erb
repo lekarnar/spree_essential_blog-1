@@ -53,14 +53,13 @@
 <% end %>
 
 <%= f.field_container :live do %>
-  <%= f.check_box :live  %> <%= f.label :live, t("activerecord.attributes.post.live") %><br />
+  <%= f.check_box :live %> <%= f.label :live, t("activerecord.attributes.post.live") %><br />
 <% end %>
 
 <% content_for :head do %>
   <script type="text/javascript">
     $(document).ready(function() {
       $('#post_posted_at').autodate();
-
     });
   </script>
 <% end %>
