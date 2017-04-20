@@ -7,11 +7,11 @@ class Spree::Blogs::Admin::PostImagesController < Spree::Admin::ResourceControll
   destroy.before :destroy_before
 
   def new
-    @post_image = Spree::PostImage.new
+    @object = Spree::PostImage.new
   end
 
   def edit
-    @post_image = Spree::PostImage.find_by_id(params[:id])
+    @object = Spree::PostImage.find_by_id(params[:id])
   end
 
   def update_positions
@@ -49,7 +49,7 @@ class Spree::Blogs::Admin::PostImagesController < Spree::Admin::ResourceControll
     end
 
     def destroy_before
-      @viewable = @post_image.viewable
+      @viewable = @object.viewable
     end
 
 end

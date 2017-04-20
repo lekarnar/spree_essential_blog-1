@@ -1,7 +1,7 @@
 class Spree::Blogs::Admin::BlogsController < Spree::Admin::ResourceController
 
   def new
-    @blog = Spree::Blog.new
+    @object = Spree::Blog.new
   end
 
   def show
@@ -9,7 +9,7 @@ class Spree::Blogs::Admin::BlogsController < Spree::Admin::ResourceController
   end
 
   def edit
-    @blog = Spree::Blog.find_by_permalink(params[:id])
+    @object = Spree::Blog.find_by_permalink(params[:id])
   end
 
   protected

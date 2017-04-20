@@ -6,12 +6,12 @@ class Spree::Blogs::Admin::PostsController < Spree::Admin::ResourceController
   # end
 
   def new
-    @post = Spree::Post.new
-    @post.posted_at ||= Time.now
+    @object = Spree::Post.new
+    @object.posted_at ||= Time.now
   end
 
   def edit
-    @post = Spree::Post.find_by_path(params[:id])
+    @object = Spree::Post.find_by_path(params[:id])
   end
 
   protected
