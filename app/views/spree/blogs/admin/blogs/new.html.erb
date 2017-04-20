@@ -2,7 +2,7 @@
 
 <%= form_for([:admin, @blog]) do |f| %>
   <fieldset>
-    <legend><%= t('.new_blog') %></legend>
+    <legend style="padding-top:20px;"><%= t('.new_blog') %></legend>
     <%= render "form", :form => f %>
     <%= render :partial => 'spree/admin/shared/new_resource_links' %>
   </fieldset>

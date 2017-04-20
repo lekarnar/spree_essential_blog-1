@@ -1,5 +1,7 @@
 <%= render :partial => 'spree/blogs/admin/shared/post_tabs', :locals => {:current => "Categories"} %>
 
+<div id="new_category"></div>
+
 <div id="categories-box">
   <%= form_for([:admin, @post]) do |f| %>
     <fieldset>
@@ -25,11 +27,9 @@
   <% end %>
 </div>
 
-<div id="new_category"></div>
-
 <% content_for :page_actions do %>
   <li id="new_category_link">
-    <%= button_link_to t('.new_category'), new_object_url, { :icon => 'icon-plus', :id => 'btn_new_category' } %>
+    <%= button_link_to t('.new_category'), new_object_url, { :icon => 'icon-plus', :id => 'btn_new_category', :class => 'btn-success' } %>
   </li>
 <% end %>
 
@@ -40,7 +40,11 @@
       jQuery('#btn_new_category').click(function (event) {
         event.preventDefault();
         jQuery(this).hide();
-        jQuery.ajax({type: 'GET', url: this.href, data: ({authenticity_token: AUTH_TOKEN}), success: function(r){ jQuery('#new_category').html(r);} });
+        jQuery.ajax({type: 'GET', url: this.href, data: ({authenticity_token: AUTH_TOKEN}), success: function(r){
+            jQuery('#new_category').html(r);
+            $('#new_post_category').closest('#main-part').css('margin-left', '15px');
+          }
+        });
       });
 
     });

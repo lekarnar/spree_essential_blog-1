@@ -1,8 +1,25 @@
 class Spree::Blogs::Admin::BlogsController < Spree::Admin::ResourceController
 
+  def new
+    @blog = Spree::Blog.new
+  end
+
   def show
     redirect_to admin_blogs_path
   end
+
+  def edit
+    @blog = Spree::Blog.find_by_permalink(params[:id])
+  end
+
+  protected
+    def model_class
+      Spree::Blog
+    end
+
+    def permitted_resource_params
+      @permitted_resource_params ||= params.require('blog').permit(:name, :permalink)
+    end
 
 private
 

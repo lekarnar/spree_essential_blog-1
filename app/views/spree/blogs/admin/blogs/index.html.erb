@@ -1,15 +1,17 @@
-<%= render :partial => 'spree/admin/shared/sub_menu/configuration' %>
+<%#= render :partial => 'spree/admin/shared/sub_menu/configuration' %>
 
 <% content_for :page_title do %>
   <%= t(:listing_blogs) %>
 <% end %>
 
-<table class="index">
+<div id="new_blog"></div>
+
+<table class="index table table-bordered">
   <thead>
 	<tr>
     	<th><%= sort_link @search, :name, t("activerecord.attributes.blog.name") %></th>
     	<th><%= sort_link @search, :live, t("activerecord.attributes.blog.permalink") %></th>
-    	<th class="actions"><%= t("action") %></th>
+    	<th class="actions"></th>
 	</tr>
   </thead>
   <tbody>
@@ -18,7 +20,11 @@
       <td><%= blog.name %></td>
       <td><%= blog.permalink %></td>
       <td class="actions">
-      	<%= link_to_with_icon 'icon-edit', t(:edit), edit_admin_blog_url(blog), :no_text => true, :data => {:action => 'edit'} %>
+      	<%#= link_to_with_icon 'icon-edit', Spree.t(:edit), edit_admin_blog_url(blog), :no_text => true, :data => {:action => 'edit'} %>
+
+        <%= link_to edit_admin_blog_url(blog), :no_text => true, :class => "btn btn-primary btn-sm" do %>
+              <span class="glyphicon glyphicon-pencil"></span>
+        <% end %>
         &nbsp;
         <%= link_to_delete blog, { :url => admin_blog_url(blog), :no_text => true } %>
       </td>
@@ -29,10 +35,9 @@
 
 <%= paginate @collection %>
 
-<div id="new_blog"></div>
 <% content_for :page_actions do %>
   <li id="new_product_link">
-    <%= button_link_to t(:new_blog), new_object_url, { :icon => 'icon-plus', :id => 'new_blog_link' } %>
+    <%= button_link_to Spree.t(:new_blog), new_object_url, { :icon => 'icon-plus', :id => 'new_blog_link', :class => 'btn-success' } %>
   </li>
 <% end %>
 
@@ -42,7 +47,11 @@
       jQuery('#new_blog_link').click(function (event) {
         event.preventDefault();
         jQuery(this).hide();
-        jQuery.ajax({type: 'GET', url: this.href, data: ({authenticity_token: AUTH_TOKEN}), success: function(r){ jQuery('#new_blog').html(r);} });
+        jQuery.ajax({type: 'GET', url: this.href, data: ({authenticity_token: AUTH_TOKEN}), success: function(r){
+            jQuery('#new_blog').html(r);
+            $('#new_blog #main-part').css('margin-left', '15px');
+          }
+        });
       });
       jQuery("#admin-menu li:contains(Configuration)").addClass("selected");
     });
