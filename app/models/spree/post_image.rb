@@ -6,7 +6,7 @@ class Spree::PostImage < Spree::Asset
     :url => '/spree/posts/:id/:style/:basename.:extension',
     :path => ':rails_root/public/spree/posts/:id/:style/:basename.:extension'
 
-  validates_attachment_presence :attachment
+  validates_attachment :attachment, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] }
 
   def image_content?
     attachment_content_type.to_s.match(/\/(jpeg|png|gif|tiff|x-photoshop)/)
