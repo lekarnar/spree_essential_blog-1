@@ -4,8 +4,7 @@
 <% if @post_category.try(:errors).present? %>
   <%= render 'spree/shared/error_messages', :target => @post_category %>
 <% end %>
-
-<%= form_for(@post_category, :url => admin_post_categories_path(@post)) do |form| %>
+<%= form_for([:admin, @post_category], :html => { :multipart => true }) do |form| %>
   <fieldset>
     <legend><%= t("new_category") %></legend>
     <%= render "form", :form => form %>

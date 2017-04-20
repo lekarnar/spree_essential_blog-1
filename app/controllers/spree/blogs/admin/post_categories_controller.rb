@@ -2,10 +2,22 @@ class Spree::Blogs::Admin::PostCategoriesController < Spree::Admin::ResourceCont
 
   before_filter :load_data
 
+  def new
+    @post_category = Spree::PostCategory.new
+  end
+
+  def edit
+    @post_category = Spree::PostCategory.find_by_id(params[:id])
+  end
+
   protected
 
   def model_class
-    @model_class = Spree::PostCategory
+    Spree::PostCategory
+  end
+
+  def permitted_resource_params
+    @permitted_resource_params ||= params.require('post_category').permit(:name, :permalink)
   end
 
   private
