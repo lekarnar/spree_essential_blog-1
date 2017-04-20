@@ -1,12 +1,12 @@
-<%= render :partial => 'spree/blogs/admin/shared/post_tabs', :locals => {:current => "Images"} %>
+<%= render :partial => 'spree/blogs/admin/shared/post_tabs', :locals => {:current => "Images", post: @post} %>
 
-<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @post_image } %>
+<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @object } %>
 
-<%= form_for([:admin, @post.id, @post_image], :url => admin_post_image_url(@post, @post_image), :html => { :multipart => true }) do |f| %>
+<%= form_for([:admin, @post.id, @object], :url => admin_post_image_url(@post, @object), :html => { :multipart => true }) do |f| %>
   <fieldset class="no-border-top">
     <p>
       <%= label_tag ("thumbnail") %>:<br/>
-      <%= link_to(image_tag(@post_image.attachment.url(:mini)), @post_image.attachment.url(:product)) %>
+      <%= link_to(image_tag(@object.attachment.url(:mini)), @object.attachment.url(:product)) %>
     </p>
     <%= render "form", :form => f %>
     <%= render :partial => 'spree/admin/shared/edit_resource_links' %>

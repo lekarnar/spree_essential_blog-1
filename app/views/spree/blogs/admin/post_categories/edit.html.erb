@@ -1,8 +1,8 @@
-<%= render :partial => 'spree/blogs/admin/shared/post_tabs', :locals => {:current => "Categories"} %>
+<%= render :partial => 'spree/blogs/admin/shared/post_tabs', :locals => {:current => "Categories", post: @post} %>
 
-<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @post_category } %>
+<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @object } %>
 
-<%= form_for([:admin, @post, @post_category], :url => admin_post_category_path(@post, @post_category.id)) do |form| %>
+<%= form_for([:admin, @post, @object], :url => admin_post_category_path(@post, @object.id)) do |form| %>
   <fieldset>
     <legend><%= t(".edit_category") %></legend>
     <%= render "form", :form => form %>

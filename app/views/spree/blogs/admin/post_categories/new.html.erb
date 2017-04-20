@@ -1,10 +1,10 @@
-<%= render :partial => 'spree/blogs/admin/shared/post_tabs', :locals => {:current => "Categories"} unless request.xhr? %>
+<%= render :partial => 'spree/blogs/admin/shared/post_tabs', :locals => {:current => "Categories", post: @post} unless request.xhr? %>
 
 
-<% if @post_category.try(:errors).present? %>
-  <%= render 'spree/shared/error_messages', :target => @post_category %>
+<% if @object.try(:errors).present? %>
+  <%= render 'spree/shared/error_messages', :target => @object %>
 <% end %>
-<%= form_for([:admin, @post_category], :html => { :multipart => true }) do |form| %>
+<%= form_for([:admin, @object], :html => { :multipart => true }) do |form| %>
   <fieldset>
     <legend><%= t("new_category") %></legend>
     <%= render "form", :form => form %>

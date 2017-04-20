@@ -9,9 +9,9 @@
   <%= Spree.t(:new_post) %>
 <% end %>
 
-<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @post } %>
+<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @object } %>
 
-<%= form_for([:admin, @post]) do |f| %>
+<%= form_for([:admin, @object]) do |f| %>
   <fieldset>
     <%= render "form", :f => f %>
     <%= render :partial => 'spree/admin/shared/new_resource_links' %>

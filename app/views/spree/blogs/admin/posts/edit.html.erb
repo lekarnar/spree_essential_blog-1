@@ -5,11 +5,11 @@
     });
 </script>
 
-<%= render :partial => 'spree/blogs/admin/shared/post_tabs', :locals => {:current => "Post Details"} %>
+<%= render :partial => 'spree/blogs/admin/shared/post_tabs', :locals => {:current => "Post Details", post: @object} %>
 
-<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @post } %>
+<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @object } %>
 
-<%= form_for([:admin, @post]) do |f| %>
+<%= form_for([:admin, @object]) do |f| %>
   <fieldset class="no-border-top">
     <%= render "form", :f => f %>
     <%= render :partial => 'spree/admin/shared/edit_resource_links' %>

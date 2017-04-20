@@ -15,7 +15,7 @@
 <div class="omega six columns">
   <%= f.field_container :posted_at do %>
     <%= f.label :posted_at, t("activerecord.attributes.post.posted_at") %><br />
-    <%= f.text_field :posted_at, :class => 'text form-control', :value => ((l @post.posted_at, :fat => :long) unless @post.posted_at.nil?) %><br />
+    <%= f.text_field :posted_at, :class => 'text form-control', :value => ((l @object.posted_at, :fat => :long) unless @object.posted_at.nil?) %><br />
     <%= error_message_on :post, :posted_at %>
   <% end %>
 </div>
@@ -48,7 +48,7 @@
 
 <%= f.field_container :posted_at do %>
   <%= f.label :expires_at, "Akcija poteče" %><br />
-  <%= f.text_field :expires_at, :class => 'form-control', :value => ((l @post.expires_at, :format => :date_time) unless @post.expires_at.nil?) %><br />
+  <%= f.text_field :expires_at, :class => 'form-control', :value => ((l @object.expires_at, :format => :date_time) unless @object.expires_at.nil?) %><br />
   <%= error_message_on :post, :expires_at %>
 <% end %>
 
