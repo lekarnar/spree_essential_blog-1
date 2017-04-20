@@ -16,7 +16,13 @@ class Spree::Post < ActiveRecord::Base
   validates :blog_id, :title, :presence => true
   validates :path,  :presence => true, :uniqueness => true, :if => proc{ |record| !record.title.blank? }
   validates :body,  :presence => true
-  validates :posted_at, :datetime => true
+  validates :posted_at, :presence => true
+
+  validate :posted_at_is_valid_datetime
+
+  def posted_at_is_valid_datetime
+    errors.add(:posted_at, 'must be a valid datetime') if ((DateTime.parse(self.posted_at.to_s) rescue ArgumentError) == ArgumentError)
+  end
 
   cattr_reader :per_page
   @@per_page = 10

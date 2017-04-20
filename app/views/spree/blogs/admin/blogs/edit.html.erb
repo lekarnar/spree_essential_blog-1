@@ -2,11 +2,11 @@
 
 <h1>Edit Blog</h1>
 
-<% if @blog.try(:errors).present? %>
-  <%= render 'spree/shared/error_messages', :target => @blog %>
+<% if @object.try(:errors).present? %>
+  <%= render 'spree/shared/error_messages', :target => @object %>
 <% end %>
 
-<%= form_for([:admin, @blog]) do |f| %>
+<%= form_for([:admin, @object]) do |f| %>
   <%= render "form", :form => f %>
   <p class="form-buttons" style="margin-top:20px;">
     <%= button Spree.t("update") %> <%= Spree.t('or') %> <%= link_to Spree.t('cancel'), collection_url, class: "btn btn-danger" %>

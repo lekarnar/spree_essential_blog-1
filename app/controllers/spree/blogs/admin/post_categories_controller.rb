@@ -3,11 +3,11 @@ class Spree::Blogs::Admin::PostCategoriesController < Spree::Admin::ResourceCont
   before_filter :load_data
 
   def new
-    @post_category = Spree::PostCategory.new
+    @object = Spree::PostCategory.new
   end
 
   def edit
-    @post_category = Spree::PostCategory.find_by_id(params[:id])
+    @object = Spree::PostCategory.find_by_id(params[:id])
   end
 
   protected

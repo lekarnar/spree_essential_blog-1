@@ -1,6 +1,6 @@
-<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @blog } %>
+<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @object } %>
 
-<%= form_for([:admin, @blog]) do |f| %>
+<%= form_for([:admin, @object]) do |f| %>
   <fieldset>
     <legend style="padding-top:20px;"><%= t('.new_blog') %></legend>
     <%= render "form", :form => f %>
