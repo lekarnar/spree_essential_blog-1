@@ -18,9 +18,9 @@ class Spree::Blogs::Admin::PostProductsController < Spree::Admin::BaseController
 
   protected
 
-  def model_class
-    @model_class = Spree::PostProduct
-  end
+    def model_class
+      Spree::PostProduct
+    end
 
   private
 

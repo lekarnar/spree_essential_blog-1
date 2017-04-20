@@ -16,9 +16,13 @@ class Spree::Blogs::Admin::PostsController < Spree::Admin::ResourceController
 
   protected
 
-  def model_class
-    @model_class = Spree::Post
-  end
+    def model_class
+      Spree::Post
+    end
+
+    def permitted_resource_params
+      @permitted_resource_params ||= params.require('post').permit(:blog_id, :title, :posted_at, :body, :tag_list, :products_title, :link_title, :expires_at, :live)
+    end
 
   private
 
@@ -32,7 +36,7 @@ class Spree::Blogs::Admin::PostsController < Spree::Admin::ResourceController
 
     def location_after_save
       path = params[:redirect_to].to_s.strip.sub(/^\/+/, "/")
-      path.blank? ? object_url : path
+      path.blank? ? admin_posts_url : path
     end
 
     def find_resource
