@@ -1,20 +1,34 @@
-class Spree::Blogs::Admin::PostProductsController < Spree::Admin::BaseController
+class Spree::Blogs::Admin::PostProductsController < Spree::Admin::ResourceController
 
   before_filter :load_data
 
   def create
     position = @post.products.count
-    @product = Spree::Product.find(params[:post_product][:product])
-    Spree::PostProduct.create(:post_id => @post.id, :product_id => @product.id, :position => position)
-    redirect_to :back
+    if params[:destroy_all]
+       for p in @post.post_products
+        p.destroy
+       end
+       redirect_to admin_post_products_url(@post) and return
+    elsif params[:add][:taxon_id] != ""
+      @taxon = Spree::Taxon.find(params[:add][:taxon_id])
+      for p in @taxon.products
+        Spree::PostProduct.create(:post_id => @post.id, :product_id => p.id, :position => position)
+        position += 1
+      end
+    else
+      @product = Spree::Variant.find(params[:variant_id]).product
+      Spree::PostProduct.create(:post_id => @post.id, :product_id => @product.id, :position => position)
+    end
+    #render :partial => "spree/blogs/admin/post_products/related_products_table", :locals => { :post => @post }, :layout => false
+    redirect_to admin_post_products_url(@post) and return
   end
 
-  def destroy
-    @related = Spree::PostProduct.find(params[:id])
-    if @related.destroy
-      render_js_for_destroy
-    end
-  end
+  # def destroy
+  #   @related = Spree::PostProduct.find(params[:id])
+  #   if @related.destroy
+  #     render_js_for_destroy
+  #   end
+  # end
 
   protected
 
