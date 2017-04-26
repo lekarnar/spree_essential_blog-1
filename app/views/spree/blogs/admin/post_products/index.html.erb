@@ -4,27 +4,12 @@
   - Related Products
 <% end %>
 
-  <div id="add-line-item">
-    <fieldset>
-      <legend><%= Spree.t('add_related_product') %></legend>
-      <%= simple_form_for(Spree::PostProduct.new, url: admin_post_products_path) do |f| %>
-        <div class="row">
-          <div class="date-range-filter col-md-8">
-            <div class="col-md-6">
-              <div class="form-group">
-                <%= label_tag :product, Spree.t('products') %>
-                <%= f.select :product, Spree::Product.pluck(:name, :id), {:include_blank => true}, :class => 'select2 js-filterable' %>
-              </div>
-            </div>
-            <div class="form-actions">
-              <%= f.submit Spree.t('add'), :class => 'btn btn-primary' %>
-            </div>
-          </div>
-        </div>
-      <% end %>
-    </fieldset>
-  </div>
+<%= simple_form_for(Spree::PostProduct.new, url: admin_post_products_path) do |f| %>
 
-  <div id="products-table-wrapper">
-    <%= render :partial => "related_products_table", :locals => { :post => @post } %>
-  </div>
+  <%= render :partial => 'add_product', locals: {f: f} %>
+<% end %>
+
+<div id="products-table-wrapper">
+  <%= render :partial => "related_products_table", :locals => { :post => @post } %>
+</div>
+
