@@ -21,7 +21,7 @@ class Spree::Blogs::Admin::PostsController < Spree::Admin::ResourceController
     end
 
     def permitted_resource_params
-      @permitted_resource_params ||= params.require('post').permit(:blog_id, :title, :posted_at, :body, :tag_list, :products_title, :link_title, :expires_at, :live)
+      @permitted_resource_params ||= params.require('post').permit(:blog_id, :title, :posted_at, :body, :tag_list, :products_title, :link_title, :expires_at, :live, post_category_ids: [])
     end
 
   private
