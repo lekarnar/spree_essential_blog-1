@@ -15,7 +15,7 @@ class Spree::PostImage < Spree::Asset
 
   def attachment_sizes
     hash = {}
-    hash.merge!(:mini => '48x48>', :small => '150x150>', :medium => '600x600>', :large => '950x700>') if image_content?
+    hash.merge!(:mini => '150x150', :small => '480x480>', :medium => '600x600>', :large => '950x700>') if image_content?
     hash
   end
 
