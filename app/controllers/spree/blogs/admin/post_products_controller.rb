@@ -16,7 +16,7 @@ class Spree::Blogs::Admin::PostProductsController < Spree::Admin::ResourceContro
         position += 1
       end
     else
-      @product = Spree::Variant.find(params[:variant_id]).product
+      @product = Spree::Variant.find(params[:add_variant_id]).product
       Spree::PostProduct.create(:post_id => @post.id, :product_id => @product.id, :position => position)
     end
     #render :partial => "spree/blogs/admin/post_products/related_products_table", :locals => { :post => @post }, :layout => false
