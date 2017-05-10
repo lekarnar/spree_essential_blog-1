@@ -15,15 +15,24 @@
           <%= collection_select(:add, :taxon_id, Spree::Taxon.all, :id, :name, { :include_blank => 'Vsi' } , :class => "select2 fullwidth") %>
       </div>
 
-      <div class="col-md-6">
+      <div class="col-md-8">
         <div data-hook="add_button" class="actions two columns omega">
           <div class="form-actions">
-            <%= f.submit Spree.t('add'), :class => 'btn btn-sm btn-primary' %>
-            <%= link_to_with_icon 'icon-trash', "Odstrani vse", admin_post_products_url(@post, :destroy_all => "1"),
+            <div class="col-md-4" style="float:left;">
+              <%= button_tag( :class => "btn btn-sm btn-primary") do %>
+                <span class="glyphicon glyphicon-plus"></span> Dodaj izdelek
+              <% end %>
+            </div>
+            <div class="col-md-4" style="float:right;">
+              <%= link_to admin_post_products_url(@post, :destroy_all => "1"),
                   :method => :post,
                   :id => 'destroy_product_to_post',
                   :class => 'button fullwidth btn btn-sm btn-danger',
-                  'data-update' => 'post-form-wrapper' %>
+                  'data-update' => 'post-form-wrapper' do %>
+                  <span class="glyphicon glyphicon-trash"></span>
+                  <span style="padding:5px;">Odstrani vse</span>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>
