@@ -5,7 +5,7 @@
 
 <%= form_for(@object, :url => admin_post_images_path(@post), :html => { :multipart => true }) do |form| %>
   <fieldset>
-    <legend><%= t("new_image") %></legend>
+    <legend><%= Spree.t("new_image") %></legend>
     <%= render "form", :form => form %>
     <%= render :partial => 'spree/admin/shared/new_resource_links' %>
   </fieldset>
