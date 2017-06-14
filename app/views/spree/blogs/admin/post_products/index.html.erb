@@ -1,7 +1,7 @@
-<%= render :partial => 'spree/blogs/admin/shared/post_tabs', :locals => {:current => "Related Products", post: @post} %>
+<%= render :partial => 'spree/blogs/admin/shared/post_tabs', :locals => {:current => Spree.t("related_products") , post: @post} %>
 
 <% content_for :page_title do %>
-  - Related Products
+  - <%= Spree.t("related_products") %>
 <% end %>
 
 <%= simple_form_for(Spree::PostProduct.new, url: admin_post_products_path) do |f| %>
