@@ -87,7 +87,7 @@
 
 
     <ul class="products asRows fl mt1lh mb1lh">
-      <% @post.products.order('spree_post_products.position').each do |product| %>
+      <% @post.products.order('spree_post_products.id').each do |product| %>
         <%= render 'spree/shared/product_simple', :product => product %>
       <% end %>
     </ul>
