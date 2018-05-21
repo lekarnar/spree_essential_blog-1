@@ -19,10 +19,11 @@
 // }(document));
 </script>
 
-<script type="text/javascript">
-  (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/hD64bzDLPCpguTgSMAuMorqBJUu1sfvE8lTUrAw3/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
-</script>
-
+<% if cookies[:acceptCookies] %>
+  <script type="text/javascript">
+    (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/hD64bzDLPCpguTgSMAuMorqBJUu1sfvE8lTUrAw3/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
+  </script>
+<% end %>
 
 <% end %>
 
@@ -102,8 +103,8 @@
 <div class="rightSide fl fourContOnBig clearfix mb1lh">
   <div class="banner four columns fiveOnTablet mb1lh">
    <!-- <a data-pin-do="embedUser" href="http://pinterest.com/lekarnar/"></a> -->
-
-    <div id="y-embedded-widget" class="yotpo embedded-widget"
+   <% if cookies[:acceptCookies] %>
+      <div id="y-embedded-widget" class="yotpo embedded-widget"
          data-appkey="hD64bzDLPCpguTgSMAuMorqBJUu1sfvE8lTUrAw3"
          data-product-id="yotpo_global_reviews"
          data-layout="reviews"
@@ -114,13 +115,15 @@
          data-body-background-color="FFFFFF"
          data-font-size="18"
          data-font-color="919191">&nbsp;
-    </div>
+       </div>
+    <% end %>
   </div>
 
   <div class="banner four columns fiveOnTablet mb1lh">
-    <a class="twitter-timeline" href="https://twitter.com/LekarnarTim" data-widget-id="354522049110233088">Tweets by @LekarnarTim</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-
+    <% if cookies[:acceptCookies] %>
+      <a class="twitter-timeline" href="https://twitter.com/LekarnarTim" data-widget-id="354522049110233088">Tweets by @LekarnarTim</a>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    <% end %>
   </div>
   <div class="banner four columns fiveOnTablet mb1lh">
 
